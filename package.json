@@ -1,0 +1,21 @@
+{
+	"name": "BANK_GUARANTEES",
+	"version": "0.0.1",
+	"private": true,
+	"description": "Bank Guarantees",
+	"scripts": {
+		"setup": "cd bank_guarantees && npm install",
+		"start:app": "cd bank_guarantees && PORT=5002 npm start",
+		"start:local": "cd bank_guarantees && npm run start:local",
+		"build:xsa": "mbt build -p=xsa --mtar=FASTCAP-bank_guarantees-Frontend.mtar",
+		"build:cf": "mbt build -p=cf --mtar=FASTCAP-bank_guarantees-Frontend-CF.mtar",
+		"deploy:cf": "cf deploy mta_archives/FASTCAP-bank_guarantees-Frontend-CF.mtar -e cf.mtaext"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"mbt": "~1.0.17"
+	},
+	"engines": {
+		"node": "^12"
+	}
+}
