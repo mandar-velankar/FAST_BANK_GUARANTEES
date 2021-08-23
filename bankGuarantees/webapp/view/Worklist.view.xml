@@ -14,7 +14,7 @@
 		<f:title>
 			<f:DynamicPageTitle>
 				<f:heading>
-					<Title text="Header Title"/>
+					<Title text="Bank Guarantees Management"/>
 				</f:heading>
 			</f:DynamicPageTitle>
 		</f:title>
@@ -29,7 +29,7 @@
 					<IconTabFilter
 						text="Preliminary"
 						key="Preliminary"
-						count="3">
+						count="14">
 					</IconTabFilter>
 					<IconTabFilter
 						text="Confirmed"
@@ -94,16 +94,16 @@
 
 					<columns>
 						<Column>
-							<Text text="{i18n>tenderReference}"/>
+							<Text text="Associated Tender"/>
 						</Column>
 						<Column>
 							<Text text="{i18n>Reference}"/>
 						</Column>
 						<Column>
-							<Text text="{i18n>IssueDate}"/>
+							<Text text="Issue Date"/>
 						</Column>
 						<Column>
-							<Text text="{i18n>ClosingDate}"/>
+							<Text text="Closing Date"/>
 						</Column>
 						<Column>
 							<Text text="{i18n>Type}"/>

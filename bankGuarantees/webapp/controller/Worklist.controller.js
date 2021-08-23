@@ -76,7 +76,8 @@ sap.ui.define([
 			} else {
 				sTitle = this.getResourceBundle().getText("worklistTableTitle");
 			}
-			this.getModel("worklistView").setProperty("/worklistTableTitle", sTitle);
+			//this.getModel("worklistView").setProperty("/worklistTableTitle", sTitle); TODO: hardcoded, replace
+			this.getModel("worklistView").setProperty("/worklistTableTitle", "Items (14)")
 		},
 
 		/**
