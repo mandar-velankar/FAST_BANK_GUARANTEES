@@ -11,10 +11,17 @@ sap.ui.define([
 				fnSetAppNotBusy,
 				iOriginalBusyDelay = this.getView().getBusyIndicatorDelay();
 
-			oViewModel = new JSONModel({
-				busy : true,
-				delay : 0
-			});
+				oViewModel = new JSONModel({
+					busy : true,
+					delay : 0,
+					layout : "OneColumn",
+					previousLayout : "",
+					actionButtonsInfo : {
+						midColumn : {
+							fullScreen : false
+						}
+					}
+				});
 			this.setModel(oViewModel, "appView");
 
 			fnSetAppNotBusy = function() {

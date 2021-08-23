@@ -119,6 +119,18 @@ sap.ui.define([
 
 		},
 
+		onQuickFilter : function (oEvent) {
+			let oBinding = this.byId("table").getBinding("items"),
+				sKey = oEvent.getParameter("selectedKey"),
+				oCancelButton = this.byId("idBtnAction");
+			
+			if(sKey === "Expired"){
+				oCancelButton.setVisible(true);
+			} else {
+				oCancelButton.setVisible(false);
+			}
+		},
+
 		/**
 		 * Event handler for refresh event. Keeps filter, sort
 		 * and group settings and refreshes the list binding.
