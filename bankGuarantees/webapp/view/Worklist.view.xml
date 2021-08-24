@@ -34,17 +34,17 @@
 					<IconTabFilter
 						text="Confirmed"
 						key="Confirmed"
-						count="4321">
+						count="14">
 					</IconTabFilter>
 					<IconTabFilter
 						text="Expired"
 						key="Expired"
-						count="333">
+						count="14">
 					</IconTabFilter>
 					<IconTabFilter
 						text="Cancelled"
 						key="Cancelled"
-						count="34">
+						count="14">
 					</IconTabFilter>
 				</items>
 				<content>
