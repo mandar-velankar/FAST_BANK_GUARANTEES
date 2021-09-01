@@ -1,0 +1,168 @@
+<mvc:View
+	controllerName="com.bayer.tender.bankguarantees.controller.Worklist"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	height="100%">
+
+	<f:DynamicPage id="dynamicPageId"
+			       stickySubheaderProvider="iconTabBar"
+				   class="sapUiNoContentPadding"
+				   toggleHeaderOnTitleClick="false">
+
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Bank Guarantees Management"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<f:content>
+			<IconTabBar
+				id="idIconTabBarFiori2"
+				expanded="{device>/isNoPhone}"
+				class="sapUiResponsiveContentPadding"
+				select=".onQuickFilter">
+				<items>
+					<IconTabFilter
+						text="Preliminary"
+						key="Preliminary"
+						count="14">
+					</IconTabFilter>
+					<IconTabFilter
+						text="Confirmed"
+						key="Confirmed"
+						count="14">
+					</IconTabFilter>
+					<IconTabFilter
+						text="Expired"
+						key="Expired"
+						count="14">
+					</IconTabFilter>
+					<IconTabFilter
+						text="Cancelled"
+						key="Cancelled"
+						count="14">
+					</IconTabFilter>
+				</items>
+				<content>
+					<Table
+					id="table"
+					width="auto"
+					items="{
+						path: '/BankGuarantees',
+						sorter: {
+							path: 'ID',
+							descending: false
+						}
+					}"
+					noDataText="{worklistView>/tableNoDataText}"
+					busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+					contextualWidth="Auto" 
+					popinLayout="Block"
+					growing="true"
+					growingThreshold="15"
+					growingScrollToLoad="false"
+					updateFinished=".onUpdateFinished">
+
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title
+								id="tableHeader"
+								text="{worklistView>/worklistTableTitle}"
+								level="H3"/>
+							<ToolbarSpacer />
+							<SearchField
+								id="searchField"
+								tooltip="{i18n>worklistSearchTooltip}"
+								search=".onSearch">
+								<layoutData>
+									<OverflowToolbarLayoutData
+										maxWidth="200px"
+										priority="NeverOverflow"/>
+								</layoutData>
+							</SearchField>
+							<Button
+								id="filterButton"
+								press=".onOpenViewSettings"
+								icon="sap-icon://filter"
+								type="Transparent"/>
+						</OverflowToolbar>
+					</headerToolbar>
+
+					<columns>
+						<Column>
+							<Text text="Associated Tender"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>Reference}"/>
+						</Column>
+						<Column>
+							<Text text="Issue Date"/>
+						</Column>
+						<Column>
+							<Text text="Closing Date"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>Type}"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>Amount}"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>Comment}"/>
+						</Column>
+						<Column hAlign="End" id="idBtnAction" visible="false">
+							<Text text=""/>
+						</Column>
+					</columns>
+
+					<items>
+						<ColumnListItem>
+							<cells>
+								<ObjectIdentifier title="{TenderID}"/>
+								<Text text="{Reference}"/>
+								<Text text="{
+											path: 'IssueDate',
+											type: 'sap.ui.model.type.Date',
+											formatOptions: {
+												pattern: 'yyyy-MM-dd'
+											}
+										}" 
+									/>
+								<Text text="{
+											path: 'ClosingDate',
+											type: 'sap.ui.model.type.Date',
+											formatOptions: {
+												pattern: 'yyyy-MM-dd'
+											}
+										}" 
+									/>
+								<Text text="{Type}"/>
+								<Text text="{
+									path: 'GuaranteedAmount',
+									type: 'sap.ui.model.type.Float',
+									formatOptions: {
+										minIntegerDigits: 3,
+										maxFractionDigits: 2
+									}
+								}" />
+								<TextArea value="{Comment}" 
+										showExceededText="false" 
+										maxLength="500" 
+										valueLiveUpdate="false" liveChange="handleLiveChange" 
+										enabled="false"/>
+								<Button text="Cancel" />
+
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</content>
+			
+			</IconTabBar>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>
