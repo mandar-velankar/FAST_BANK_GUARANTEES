@@ -40,6 +40,9 @@ sap.ui.define([
 				tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
 				tableBusyDelay : 0
 			});
+
+			this.bgState = this.getOwnerComponent().getState(this.getOwnerComponent().BG);
+			this.setModel(this.bgState.getModel(), "bg");
 			this.setModel(oViewModel, "worklistView");
 
 			// Make sure, busy indication is showing immediately so there is no
