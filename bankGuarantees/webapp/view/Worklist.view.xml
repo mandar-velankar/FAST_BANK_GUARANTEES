@@ -56,6 +56,9 @@
 						sorter: {
 							path: 'ID',
 							descending: false
+						},
+						parameters: {
+							expand: 'Tender'
 						}
 					}"
 					noDataText="{worklistView>/tableNoDataText}"
@@ -94,22 +97,28 @@
 
 					<columns>
 						<Column>
-							<Text text="Associated Tender"/>
+							<Text text="{i18n>AssociatedTender}"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>TenderStatus}"/>
 						</Column>
 						<Column>
 							<Text text="{i18n>Reference}"/>
 						</Column>
 						<Column>
-							<Text text="Issue Date"/>
+							<Text text="{i18n>IssueDate}"/>
 						</Column>
 						<Column>
-							<Text text="Closing Date"/>
+							<Text text="{i18n>ClosingDate}"/>
 						</Column>
 						<Column>
 							<Text text="{i18n>Type}"/>
 						</Column>
 						<Column>
 							<Text text="{i18n>Amount}"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>AwardedValue}"/>
 						</Column>
 						<Column>
 							<Text text="{i18n>Comment}"/>
@@ -123,6 +132,7 @@
 						<ColumnListItem>
 							<cells>
 								<ObjectIdentifier title="{TenderID}"/>
+								<Text text="{Tender/TenderStatus}"/>
 								<Text text="{Reference}"/>
 								<Text text="{
 											path: 'IssueDate',
@@ -148,13 +158,22 @@
 										minIntegerDigits: 3,
 										maxFractionDigits: 2
 									}
-								}" />
+								} {Currency}" />
+								<Text text="{
+									path: 'GuaranteedAmount',
+									type: 'sap.ui.model.type.Float',
+									formatter: '.formatter.awardedAmount',
+									formatOptions: {
+										minIntegerDigits: 3,
+										maxFractionDigits: 2
+									}
+								} {Currency}" />
 								<TextArea value="{Comment}" 
 										showExceededText="false" 
 										maxLength="500" 
 										valueLiveUpdate="false" liveChange="handleLiveChange" 
 										enabled="false"/>
-								<Button text="Cancel" />
+								<Button text="Cancel" press=".onCancelGuarantee" />
 
 							</cells>
 						</ColumnListItem>

@@ -1,7 +1,7 @@
 sap.ui.define([
 	"./BaseController",
 	"sap/ui/model/json/JSONModel",
-	"../model/formatter",
+	"../util/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
 ], function (BaseController, JSONModel, formatter, Filter, FilterOperator) {
@@ -174,6 +174,22 @@ sap.ui.define([
 			if (aTableSearchState.length !== 0) {
 				oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
 			}
+		},
+
+		onCancelGuarantee: function(event){
+			const oBindingContext = event.getSource().getBindingContext();
+			var that = this;
+
+			sap.m.MessageBox.warning("Are you sure you want to cancel this bank guarantee?", {
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				styleClass: "sapUiSizeCompact",
+				onClose: function (sAction) {
+					if (sAction === "YES") {
+						that.bgState.onCancelBankGuarantee(oBindingContext);
+					} else {
+					}
+				}
+			});
 		}
 
 	});

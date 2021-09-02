@@ -23,21 +23,30 @@ sap.ui.define([
 
         getBankGuarantees: function (){
             return this.bankGuarantees || [];
-        }
+        },
         
-        //<property>Changed function
-        // countryCodeChanged: function (state, event) {
-        //     //do something when countryCode changes in the view/ui
-        // },
-     
-        // getJSON: function () {
-        //     return this.getJSONObject(["CountryCode", "CountryName"]);
-        // },
-        // getAll: function () {
-        //     // return {
-        //     //     ...this
-        //     // };
-        // }
+        getJSON: function () {
+            return this.getJSONObject([
+                "iD",
+                "tenderID",
+                "countryCode",
+                "reference",
+                "issueDate",
+                "closingDate",
+                "status",
+                "type",
+                "guaranteedAmount",
+                "currency",
+                "comment"
+            ]);
+        },
+
+        getAll: function () {
+            return {
+                ...this.getJSON(),
+            };
+        }
     });
+    
     return bankGuarantee;
 });

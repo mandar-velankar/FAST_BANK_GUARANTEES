@@ -13,11 +13,23 @@ sap.ui.define([
 		},
 
         getBankGuarantee: function (sId) {
-            var sKey = this.model.createKey("/BankGuarantee", {
+            var sKey = this.model.createKey("/BankGuarantees", {
                 id: sId
             });
             return this.odata(sKey).get({});
-        }
+        },
+
+		saveBankGuarantee: function (guarantee) {
+
+			const data = guarantee.getAll();
+
+			const sKey = this.model.createKey("/BankGuarantees", {
+				ID: data.ID
+			});
+
+			return this.odata(sKey).put(data);
+
+		},
 
 	});
 
