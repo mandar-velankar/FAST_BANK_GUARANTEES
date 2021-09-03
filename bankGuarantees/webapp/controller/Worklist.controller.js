@@ -80,7 +80,8 @@ sap.ui.define([
 				sTitle = this.getResourceBundle().getText("worklistTableTitle");
 			}
 			//this.getModel("worklistView").setProperty("/worklistTableTitle", sTitle); TODO: hardcoded, replace
-			this.getModel("worklistView").setProperty("/worklistTableTitle", "Items (14)")
+			this.getModel("worklistView").setProperty("/worklistTableTitle", "Items (" + iTotalItems + ")")
+			this.getModel("worklistView").setProperty("/totalItems", iTotalItems)
 		},
 
 		/**
