@@ -80,7 +80,7 @@
 							<SearchField
 								id="searchField"
 								tooltip="{i18n>worklistSearchTooltip}"
-								search=".onSearch">
+								search=".setFilter">
 								<layoutData>
 									<OverflowToolbarLayoutData
 										maxWidth="200px"
