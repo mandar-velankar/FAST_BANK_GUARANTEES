@@ -31,3 +31,54 @@ builder:
         - "lib"
         - "libs"
         - "themes"
+bundles:
+    - bundleDefinition:
+        name: "com/bayer/tender/bankGuarantees/Component-preload.js"
+        defaultFileTypes:
+        - ".js"
+        - ".json"
+        - ".xml"
+        - ".html"
+        - ".library"
+        sections:
+          - mode: preload
+            filters:
+              - com/bayer/tender/bankGuarantees/Component.js
+              - com/bayer/tender/bankGuarantees/manifest.json
+              - com/bayer/tender/bankGuarantees/webapp/controller/**
+              - com/bayer/tender/bankGuarantees/webapp/i18n/**
+              - com/bayer/tender/bankGuarantees/webapp/model/**
+              - com/bayer/tender/bankGuarantees/webapp/service/**
+              - com/bayer/tender/bankGuarantees/webapp/state/**
+              - com/bayer/tender/bankGuarantees/webapp/view/**
+              - "!com/bayer/tender/bankGuarantees/components/**"
+              - "!com/bayer/tender/bankGuarantees/libraries/**"
+            resolve: false
+            sort: true
+      bundleOptions:
+        optimize: true
+        usePredefineCalls: true
+    - bundleDefinition:
+        name: "com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/library-preload.js"
+        defaultFileTypes:
+        - ".js"
+        - ".json"
+        - ".xml"
+        - ".html"
+        - ".library"
+        sections:
+          - mode: preload
+            filters:
+              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/library.js
+              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/manifest.json
+              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/messagebyndle.properties
+              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/controllers/**
+              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/controls/**
+              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/libs/**
+              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/objects/**
+              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/themes/**
+            resolve: false
+            sort: true
+      bundleOptions:
+        optimize: true
+        usePredefineCalls: true

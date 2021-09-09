@@ -2,8 +2,10 @@ sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
 	"./model/models",
+	"./service/BgService",
+	"./state/BgState",
 	"./controller/ErrorHandler"
-], function (UIComponent, Device, models, ErrorHandler) {
+], function (UIComponent, Device, models,BgService, BgState, ErrorHandler) {
 	"use strict";
 
 	return UIComponent.extend("com.bayer.tender.bankguarantees.Component", {
@@ -11,6 +13,7 @@ sap.ui.define([
 		metadata : {
 			manifest: "json"
 		},
+		BG: "Bg",
 
 		/**
 		 * The component is initialized by UI5 automatically during the startup of the app and calls the init method once.
@@ -19,6 +22,9 @@ sap.ui.define([
 		 * @override
 		 */
 		init : function () {
+			this.BgService = new BgService(this.getModel());
+			this.BgState = new BgState(this.BgService);
+
 			// call the base component's init function
 			UIComponent.prototype.init.apply(this, arguments);
 
@@ -30,6 +36,10 @@ sap.ui.define([
 
 			// create the views based on the url/hash
 			this.getRouter().initialize();
+		},
+
+		getState: function (stateName) {
+			return this[stateName + "State"];
 		},
 
 		/**
