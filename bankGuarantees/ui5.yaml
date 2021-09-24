@@ -1,6 +1,6 @@
 specVersion: '2.4'
 metadata:
-  name: 'bank_guarantees'
+  name: 'bankGuarantees'
 type: application
 server:
   settings:
@@ -31,9 +31,9 @@ builder:
         - "lib"
         - "libs"
         - "themes"
-bundles:
+  bundles:
     - bundleDefinition:
-        name: "com/bayer/tender/bankGuarantees/Component-preload.js"
+        name: "com/bayer/tender/bankguarantees/Component-preload.js"
         defaultFileTypes:
         - ".js"
         - ".json"
@@ -43,23 +43,23 @@ bundles:
         sections:
           - mode: preload
             filters:
-              - com/bayer/tender/bankGuarantees/Component.js
-              - com/bayer/tender/bankGuarantees/manifest.json
-              - com/bayer/tender/bankGuarantees/webapp/controller/**
-              - com/bayer/tender/bankGuarantees/webapp/i18n/**
-              - com/bayer/tender/bankGuarantees/webapp/model/**
-              - com/bayer/tender/bankGuarantees/webapp/service/**
-              - com/bayer/tender/bankGuarantees/webapp/state/**
-              - com/bayer/tender/bankGuarantees/webapp/view/**
-              - "!com/bayer/tender/bankGuarantees/components/**"
-              - "!com/bayer/tender/bankGuarantees/libraries/**"
+              - com/bayer/tender/bankguarantees/Component.js
+              - com/bayer/tender/bankguarantees/manifest.json
+              - com/bayer/tender/bankguarantees/webapp/controller/**
+              - com/bayer/tender/bankguarantees/webapp/i18n/**
+              - com/bayer/tender/bankguarantees/webapp/model/**
+              - com/bayer/tender/bankguarantees/webapp/service/**
+              - com/bayer/tender/bankguarantees/webapp/state/**
+              - com/bayer/tender/bankguarantees/webapp/view/**
+              - "!com/bayer/tender/bankguarantees/components/**"
+              - "!com/bayer/tender/bankguarantees/libraries/**"
             resolve: false
             sort: true
       bundleOptions:
         optimize: true
         usePredefineCalls: true
     - bundleDefinition:
-        name: "com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/library-preload.js"
+        name: "com/bayer/tender/bankguarantees/libraries/uilib/src/com/bayer/tender/uilib/library-preload.js"
         defaultFileTypes:
         - ".js"
         - ".json"
@@ -69,14 +69,14 @@ bundles:
         sections:
           - mode: preload
             filters:
-              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/library.js
-              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/manifest.json
-              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/messagebyndle.properties
-              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/controllers/**
-              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/controls/**
-              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/libs/**
-              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/objects/**
-              - com/bayer/tender/bankGuarantees/libraries/uilib/src/com/bayer/tender/uilib/themes/**
+              - com/bayer/tender/bankguarantees/libraries/uilib/src/com/bayer/tender/uilib/library.js
+              - com/bayer/tender/bankguarantees/libraries/uilib/src/com/bayer/tender/uilib/manifest.json
+              - com/bayer/tender/bankguarantees/libraries/uilib/src/com/bayer/tender/uilib/messagebyndle.properties
+              - com/bayer/tender/bankguarantees/libraries/uilib/src/com/bayer/tender/uilib/controllers/**
+              - com/bayer/tender/bankguarantees/libraries/uilib/src/com/bayer/tender/uilib/controls/**
+              - com/bayer/tender/bankguarantees/libraries/uilib/src/com/bayer/tender/uilib/libs/**
+              - com/bayer/tender/bankguarantees/libraries/uilib/src/com/bayer/tender/uilib/objects/**
+              - com/bayer/tender/bankguarantees/libraries/uilib/src/com/bayer/tender/uilib/themes/**
             resolve: false
             sort: true
       bundleOptions:
