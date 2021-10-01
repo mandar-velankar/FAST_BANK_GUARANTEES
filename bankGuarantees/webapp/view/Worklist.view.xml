@@ -17,7 +17,7 @@
 		<f:content>
 			<IconTabBar id="idIconTabBarFiori2" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding" select=".onQuickFilter">
 				<items>
-					<IconTabFilter text="Active" key="Activte" >
+					<IconTabFilter text="Active" key="Active" >
 					</IconTabFilter>
 					<IconTabFilter text="Expired" key="Expired" >
 					</IconTabFilter>
