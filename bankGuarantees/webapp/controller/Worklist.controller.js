@@ -295,7 +295,7 @@ sap.ui.define([
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Confirmed"));
 					break;
 				case "Expired":
-					aFilters.push(new Filter("ClosingDate", FilterOperator.LE, todayDate));
+					aFilters.push(new Filter("PriceAgreement/ExpiryDate", FilterOperator.LE, todayDate));
 
 					break;
 				case "Closed":
