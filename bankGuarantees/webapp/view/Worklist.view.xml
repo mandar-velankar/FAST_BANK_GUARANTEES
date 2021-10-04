@@ -1,15 +1,10 @@
-<mvc:View
-	controllerName="com.bayer.tender.bankguarantees.controller.Worklist"
+<mvc:View controllerName="com.bayer.tender.bankguarantees.controller.Worklist"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
 	xmlns:f="sap.f"
-	xmlns:layout="sap.ui.layout"
-	height="100%">
+	xmlns:layout="sap.ui.layout" height="100%">
 
-	<f:DynamicPage id="dynamicPageId"
-			       stickySubheaderProvider="iconTabBar"
-				   class="sapUiNoContentPadding"
-				   toggleHeaderOnTitleClick="false">
+	<f:DynamicPage id="dynamicPageId" stickySubheaderProvider="iconTabBar" class="sapUiNoContentPadding" toggleHeaderOnTitleClick="false">
 
 		<f:title>
 			<f:DynamicPageTitle>
@@ -20,38 +15,17 @@
 		</f:title>
 
 		<f:content>
-			<IconTabBar
-				id="idIconTabBarFiori2"
-				expanded="{device>/isNoPhone}"
-				class="sapUiResponsiveContentPadding"
-				select=".onQuickFilter">
+			<IconTabBar id="idIconTabBarFiori2" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding" select=".onQuickFilter">
 				<items>
-					<IconTabFilter
-						text="Preliminary"
-						key="Preliminary"
-						count="{worklistView>/totalItems}">
+					<IconTabFilter text="Active" key="Active" >
 					</IconTabFilter>
-					<IconTabFilter
-						text="Confirmed"
-						key="Confirmed"
-						count="{worklistView>/totalItems}">
+					<IconTabFilter text="Expired" key="Expired" >
 					</IconTabFilter>
-					<IconTabFilter
-						text="Expired"
-						key="Expired"
-						count="{worklistView>/totalItems}">
-					</IconTabFilter>
-					<IconTabFilter
-						text="Cancelled"
-						key="Cancelled"
-						count=" {worklistView>/totalItems}">
+					<IconTabFilter text="Closed" key="Closed" >
 					</IconTabFilter>
 				</items>
 				<content>
-					<Table
-					id="table"
-					width="auto"
-					items="{
+					<Table id="table" width="auto" items="{
 						path: '/BankGuarantees',
 						sorter: {
 							path: 'ID',
@@ -60,98 +34,83 @@
 						parameters: {
 							expand: 'Tender'
 						}
-					}"
-					noDataText="{worklistView>/tableNoDataText}"
-					busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-					contextualWidth="Auto" 
-					popinLayout="Block"
-					growing="true"
-					growingThreshold="15"
-					growingScrollToLoad="false"
-					updateFinished=".onUpdateFinished">
 
-					<headerToolbar>
-						<OverflowToolbar>
-							<Title
-								id="tableHeader"
-								text="{worklistView>/worklistTableTitle}" 
-								level="H3"/>
-							<ToolbarSpacer />
-							<SearchField
-								id="searchField"
-								tooltip="{i18n>worklistSearchTooltip}"
-								search=".setFilter">
-								<layoutData>
-									<OverflowToolbarLayoutData
-										maxWidth="200px"
-										priority="NeverOverflow"/>
-								</layoutData>
-							</SearchField>
-							<Button
-								id="filterButton"
-								press=".onOpenViewSettings"
-								icon="sap-icon://filter"
-								type="Transparent"/>
-						</OverflowToolbar>
-					</headerToolbar>
+							
+						
+					}" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" contextualWidth="Auto" popinLayout="Block" growing="true" growingThreshold="15" growingScrollToLoad="false" updateFinished=".onUpdateFinished">
 
-					<columns>
-						<Column>
-							<Text text="{i18n>AssociatedTender}"/>
-						</Column>
-						<Column>
-							<Text text="{i18n>TenderStatus}"/>
-						</Column>
-						<Column>
-							<Text text="{i18n>Reference}"/>
-						</Column>
-						<Column>
-							<Text text="{i18n>IssueDate}"/>
-						</Column>
-						<Column>
-							<Text text="{i18n>ClosingDate}"/>
-						</Column>
-						<Column>
-							<Text text="{i18n>Type}"/>
-						</Column>
-						<Column>
-							<Text text="{i18n>Amount}"/>
-						</Column>
-						<Column>
-							<Text text="{i18n>AwardedValue}"/>
-						</Column>
-						<Column>
-							<Text text="{i18n>Comment}"/>
-						</Column>
-						<Column hAlign="End" id="idBtnAction" visible="false">
-							<Text text=""/>
-						</Column>
-					</columns>
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
+								<ToolbarSpacer />
+								<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".setFilter">
+									<layoutData>
+										<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
+									</layoutData>
+								</SearchField>
+								<Button id="filterButton" press=".onOpenViewSettings" icon="sap-icon://filter" type="Transparent"/>
+							</OverflowToolbar>
+						</headerToolbar>
 
-					<items>
-						<ColumnListItem>
-							<cells>
-								<ObjectIdentifier title="{TenderID}"/>
-								<Text text="{Tender/TenderStatus}"/>
-								<Text text="{Reference}"/>
-								<Text text="{
+						<columns>
+							<Column>
+								<Text text="{i18n>AssociatedTender}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>TenderStatus}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>Status}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>Reference}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>IssueDate}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>ClosingDate}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>Type}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>Amount}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>AwardedValue}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>Comment}"/>
+							</Column>
+							<Column hAlign="End" id="idBtnAction" visible="false">
+								<Text text=""/>
+							</Column>
+						</columns>
+
+						<items>
+							<ColumnListItem>
+								<cells>
+									<ObjectIdentifier title="{TenderID}"/>
+									<Text text="{Tender/TenderStatus}"/>
+									<Text text="{Status}"/>
+									<Text text="{Reference}"/>
+									<Text text="{
 											path: 'IssueDate',
 											type: 'sap.ui.model.type.Date',
 											formatOptions: {
 												pattern: 'yyyy-MM-dd'
 											}
-										}" 
-									/>
-								<Text text="{
+										}" />
+									<Text text="{
 											path: 'ClosingDate',
 											type: 'sap.ui.model.type.Date',
 											formatOptions: {
 												pattern: 'yyyy-MM-dd'
 											}
-										}" 
-									/>
-								<Text text="{Type}"/>
-								<Text text="{
+										}" />
+									<Text text="{Type}"/>
+									<Text text="{
 									path: 'GuaranteedAmount',
 									type: 'sap.ui.model.type.Float',
 									formatOptions: {
@@ -159,7 +118,7 @@
 										maxFractionDigits: 2
 									}
 								} {Currency}" />
-								<Text text="{
+									<Text text="{
 									path: 'GuaranteedAmount',
 									type: 'sap.ui.model.type.Float',
 									formatOptions: {
@@ -167,19 +126,15 @@
 										maxFractionDigits: 2
 									}
 								} {Currency}" />
-								<TextArea value="{Comment}" 
-										showExceededText="false" 
-										maxLength="500" 
-										valueLiveUpdate="false" liveChange="handleLiveChange" 
-										enabled="false"/>
-								<Button text="Cancel" press=".onCancelGuarantee" />
+									<TextArea value="{Comment}" showExceededText="false" maxLength="500" valueLiveUpdate="false" liveChange="handleLiveChange" enabled="false"/>
+									<Button text="Cancel" press=".onCancelGuarantee" />
 
-							</cells>
-						</ColumnListItem>
-					</items>
-				</Table>
-			</content>
-			
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+
 			</IconTabBar>
 		</f:content>
 	</f:DynamicPage>
