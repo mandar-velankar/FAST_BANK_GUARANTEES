@@ -60,9 +60,6 @@
 								<Text text="{i18n>TenderStatus}"/>
 							</Column>
 							<Column>
-								<Text text="{i18n>Status}"/>
-							</Column>
-							<Column>
 								<Text text="{i18n>Reference}"/>
 							</Column>
 							<Column>
@@ -93,7 +90,6 @@
 								<cells>
 									<ObjectIdentifier title="{TenderID}"/>
 									<Text text="{Tender/TenderStatus}"/>
-									<Text text="{Status}"/>
 									<Text text="{Reference}"/>
 									<Text text="{
 											path: 'IssueDate',
