@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="BankGuaranteeService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="BankGuarantees" EntityType="BankGuaranteeService.BankGuarantees"/>
+                <EntitySet Name="PT_TMTEND" EntityType="BankGuaranteeService.PT_TMTEND"/>
+                <AssociationSet Name="BankGuarantees_Tender" Association="BankGuaranteeService.BankGuarantees_Tender">
+                    <End Role="BankGuarantees" EntitySet="BankGuarantees"/>
+                    <End Role="PT_TMTEND" EntitySet="PT_TMTEND"/>
+                </AssociationSet>
+                <AssociationSet Name="PT_TMTEND_BankGuarantees" Association="BankGuaranteeService.PT_TMTEND_BankGuarantees">
+                    <End Role="PT_TMTEND" EntitySet="PT_TMTEND"/>
+                    <End Role="BankGuarantees" EntitySet="BankGuarantees"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="BankGuarantees">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="TenderID" Type="Edm.String"/>
+                <Property Name="CountryCode" Type="Edm.String"/>
+                <Property Name="Reference" Type="Edm.String"/>
+                <Property Name="IssueDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="ClosingDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="Status" Type="Edm.String"/>
+                <Property Name="Type" Type="Edm.String"/>
+                <Property Name="GuaranteedAmount" Type="Edm.Double"/>
+                <Property Name="Currency" Type="Edm.String"/>
+                <Property Name="Comment" Type="Edm.String"/>
+                <NavigationProperty Name="Tender" Relationship="BankGuaranteeService.BankGuarantees_Tender" FromRole="BankGuarantees" ToRole="PT_TMTEND"/>
+            </EntityType>
+            <EntityType Name="PT_TMTEND">
+                <Key>
+                    <PropertyRef Name="TenderID"/>
+                </Key>
+                <Property Name="TenderID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="CountryCode" Type="Edm.String" MaxLength="2" Nullable="false"/>
+                <Property Name="ToolID" Type="Edm.Int32"/>
+                <Property Name="TenderNo" Type="Edm.Int32"/>
+                <Property Name="CloneTenderID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="SubmittedOn" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="SubmittedBy" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Active" Type="Edm.Int32"/>
+                <Property Name="Classification" Type="Edm.String" MaxLength="50"/>
+                <Property Name="BiddingTypeLevel1" Type="Edm.String" MaxLength="50"/>
+                <Property Name="BiddingTypeLevel2" Type="Edm.String" MaxLength="50"/>
+                <Property Name="BiddingTypeLevel3" Type="Edm.String" MaxLength="50"/>
+                <Property Name="HighValue" Type="Edm.Boolean"/>
+                <Property Name="OfferStartDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="IbizID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="PublicNotice" Type="Edm.String"/>
+                <Property Name="TenderName" Type="Edm.String" MaxLength="250"/>
+                <Property Name="InstituteID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="TenderChannel" Type="Edm.String" MaxLength="255"/>
+                <Property Name="GroupPurchasing" Type="Edm.Int32"/>
+                <Property Name="PublicationDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="BidDueDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="AwardDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="NextPublicationDye" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="ContractLength" Type="Edm.Int32"/>
+                <Property Name="ContractExtenseion" Type="Edm.Int32"/>
+                <Property Name="TenderStatus" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ManualSaveStatus" Type="Edm.String" MaxLength="50"/>
+                <Property Name="FoldersCreated" Type="Edm.Int32"/>
+                <Property Name="TENDER_TYPE_ID" Type="Edm.Int32"/>
+                <Property Name="CONTRACT_TYPE_ID" Type="Edm.Int32"/>
+                <Property Name="SALES_TYPE_ID" Type="Edm.Int32"/>
+                <Property Name="TENDER_ORIGIN_ID" Type="Edm.Int32"/>
+                <Property Name="PROCUREMENT_METHOD_ID" Type="Edm.String"/>
+                <Property Name="PROCUREMENT_REASON" Type="Edm.String"/>
+                <NavigationProperty Name="BankGuarantees" Relationship="BankGuaranteeService.PT_TMTEND_BankGuarantees" FromRole="PT_TMTEND" ToRole="BankGuarantees"/>
+            </EntityType>
+            <Association Name="BankGuarantees_Tender">
+                <End Role="BankGuarantees" Type="BankGuaranteeService.BankGuarantees" Multiplicity="*"/>
+                <End Role="PT_TMTEND" Type="BankGuaranteeService.PT_TMTEND" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="PT_TMTEND">
+                        <PropertyRef Name="TenderID"/>
+                    </Principal>
+                    <Dependent Role="BankGuarantees">
+                        <PropertyRef Name="TenderID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="PT_TMTEND_BankGuarantees">
+                <End Role="PT_TMTEND" Type="BankGuaranteeService.PT_TMTEND" Multiplicity="*"/>
+                <End Role="BankGuarantees" Type="BankGuaranteeService.BankGuarantees" Multiplicity="0..1"/>
+            </Association>
+            <Annotations Target="BankGuaranteeService.BankGuarantees/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Created On"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+            </Annotations>
+            <Annotations Target="BankGuaranteeService.BankGuarantees/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Created By"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+            </Annotations>
+            <Annotations Target="BankGuaranteeService.BankGuarantees/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Changed On"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+            </Annotations>
+            <Annotations Target="BankGuaranteeService.BankGuarantees/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Changed By"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -11,7 +11,7 @@ build-parameters:
 modules:
   - name: FASTBANKGUARANTEES-app
     type: html5
-    path: bank_guarantees
+    path: bankGuarantees
     build-parameters:
       builder: custom
       commands:
