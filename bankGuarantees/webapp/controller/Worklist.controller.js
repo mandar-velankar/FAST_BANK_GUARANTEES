@@ -22,7 +22,7 @@ sap.ui.define([
 		 * Called when the worklist controller is instantiated.
 		 * @public
 		 */
-		onInit : function () {
+		onInit: function () {
 			var oViewModel,
 				iOriginalBusyDelay,
 				oTable = this.byId("table");
@@ -35,18 +35,18 @@ sap.ui.define([
 			this._aTableSearchState = [];
 			// keeps the filter and search state
 			this._oListFilterState = {
-				aFilter : [],
-				aSearch : []
+				aFilter: [],
+				aSearch: []
 			};
 
 			// Model used to manipulate control states
 			oViewModel = new JSONModel({
-				worklistTableTitle : this.getResourceBundle().getText("worklistTableTitle"),
+				worklistTableTitle: this.getResourceBundle().getText("worklistTableTitle"),
 				shareOnJamTitle: this.getResourceBundle().getText("worklistTitle"),
 				shareSendEmailSubject: this.getResourceBundle().getText("shareSendEmailWorklistSubject"),
 				shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href]),
-				tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
-				tableBusyDelay : 0
+				tableNoDataText: this.getResourceBundle().getText("tableNoDataText"),
+				tableBusyDelay: 0
 			});
 
 			this.bgState = this.getOwnerComponent().getState(this.getOwnerComponent().BG);
@@ -57,10 +57,21 @@ sap.ui.define([
 			// Make sure, busy indication is showing immediately so there is no
 			// break after the busy indication for loading the view's meta data is
 			// ended (see promise 'oWhenMetadataIsLoaded' in AppController)
-			oTable.attachEventOnce("updateFinished", function(){
+			oTable.attachEventOnce("updateFinished", function () {
 				// Restore original busy indicator delay for worklist's table
 				oViewModel.setProperty("/tableBusyDelay", iOriginalBusyDelay);
+				let oBinding = oTable.getBinding("items"),
+				aFilters = [];
+
+
+
+			aFilters.push(new Filter("Status", FilterOperator.EQ, "Preliminary"));
+			aFilters.push(new Filter("Status", FilterOperator.EQ, "Confirmed"));
+
+			oBinding.filter(aFilters);
 			});
+
+
 		},
 
 		/* =========================================================== */
@@ -76,7 +87,7 @@ sap.ui.define([
 		 * @param {sap.ui.base.Event} oEvent the update finished event
 		 * @public
 		 */
-		onUpdateFinished : function (oEvent) {
+		onUpdateFinished: function (oEvent) {
 			// update the worklist's object counter after the table update
 			var sTitle,
 				oTable = oEvent.getSource(),
@@ -98,7 +109,7 @@ sap.ui.define([
 		 * @param {sap.ui.base.Event} oEvent the table selectionChange event
 		 * @public
 		 */
-		onPress : function (oEvent) {
+		onPress: function (oEvent) {
 			// The source is the list item that got pressed
 			this._showObject(oEvent.getSource());
 		},
@@ -108,12 +119,12 @@ sap.ui.define([
 		 * We navigate back in the browser history
 		 * @public
 		 */
-		onNavBack : function() {
+		onNavBack: function () {
 			// eslint-disable-next-line sap-no-history-manipulation
 			history.go(-1);
 		},
 
-		setFilter: function() {
+		setFilter: function () {
 			var sSearch = this.byId("searchField").getProperty("value");
 			var orFilters = [];
 			var andFilters = [];
@@ -161,7 +172,7 @@ sap.ui.define([
 			oTable.getBinding("items").filter(oFilters, FilterType.Application);
 		},
 
-		onSearch : function (oEvent) {
+		onSearch: function (oEvent) {
 			if (oEvent.getParameters().refreshButtonPressed) {
 				// Search field's 'refresh' button has been pressed.
 				// This is visible if you select any master list item.
@@ -189,7 +200,7 @@ sap.ui.define([
 		 * @param {sap.ui.base.Event} oEvent the confirm event
 		 * @public
 		 */
-		 onConfirmViewSettingsDialog : function (oEvent) {
+		onConfirmViewSettingsDialog: function (oEvent) {
 
 			var aFilterItems = oEvent.getParameters().filterItems,
 				aFilters = [],
@@ -200,13 +211,13 @@ sap.ui.define([
 			aFilterItems.forEach(function (oItem) {
 				const sFilter = oItem.getParent().getText();
 				switch (sFilter) {
-					case "Reference" :
+					case "Reference":
 						aFilters.push(new Filter("Reference", FilterOperator.EQ, oItem.getKey()));
 						break;
-					case "AssociatedTender" :
+					case "AssociatedTender":
 						aFilters.push(new Filter("TenderID", FilterOperator.EQ, oItem.getText()));
 						break;
-					default :
+					default:
 						break;
 				}
 				aCaptions.push(oItem.getText());
@@ -223,7 +234,7 @@ sap.ui.define([
 		 * Internal helper method to apply both filter and search state together on the list binding
 		 * @private
 		 */
-		 _applyFilterSearch : function () {
+		_applyFilterSearch: function () {
 			var aFilters = this._oListFilterState.aSearch.concat(this._oListFilterState.aFilter),
 				oViewModel = this.getModel("worklistView");
 			this._oList.getBinding("items").filter(aFilters, "Application");
@@ -252,28 +263,56 @@ sap.ui.define([
 			this._oList.getBinding("items").sort(aSorters);
 		},
 
-				/**
-		 * Internal helper method that sets the filter bar visibility property and the label's caption to be shown
-		 * @param {string} sFilterBarText the selected filter value
-		 * @private
-		 */
-		_updateFilterBar : function (sFilterBarText) {
+		/**
+ * Internal helper method that sets the filter bar visibility property and the label's caption to be shown
+ * @param {string} sFilterBarText the selected filter value
+ * @private
+ */
+		_updateFilterBar: function (sFilterBarText) {
 			var oViewModel = this.getModel("worklistView");
 			oViewModel.setProperty("/isFilterBarVisible", (this._oListFilterState.aFilter.length > 0));
 			oViewModel.setProperty("/filterBarLabel", this.getResourceBundle().getText("masterFilterBarText", [sFilterBarText]));
 		},
 
 
-		onQuickFilter : function (oEvent) {
+		onQuickFilter: function (oEvent) {
 			let oBinding = this.byId("table").getBinding("items"),
 				sKey = oEvent.getParameter("selectedKey"),
-				oCancelButton = this.byId("idBtnAction");
-			
-			if(sKey === "Expired"){
+				oCancelButton = this.byId("idBtnAction"),
+				aFilters = [],
+				todayDate = new Date();
+
+
+			if (sKey === "Expired") {
 				oCancelButton.setVisible(true);
 			} else {
 				oCancelButton.setVisible(false);
 			}
+
+			switch (sKey) {
+				case "Active":
+					aFilters.push(new Filter("Status", FilterOperator.EQ, "Preliminary"));
+					aFilters.push(new Filter("Status", FilterOperator.EQ, "Confirmed"));
+					break;
+				case "Expired":
+					aFilters.push(new Filter("ClosingDate", FilterOperator.LE, todayDate));
+
+					break;
+				case "Closed":
+					aFilters.push(new Filter("Status", FilterOperator.EQ, "Cancelled"));
+					break;
+				default:
+					break;
+			}
+
+			oBinding.filter(aFilters);
+
+
+
+
+
+
+
 		},
 
 		/**
@@ -281,7 +320,7 @@ sap.ui.define([
 		 * @param {sap.ui.base.Event} oEvent the button press event
 		 * @public
 		 */
-		 onOpenViewSettings: function (oEvent) {
+		onOpenViewSettings: function (oEvent) {
 			var sDialogTab = "sort";
 			if (oEvent.getSource() instanceof sap.m.Button) {
 				var sButtonId = oEvent.getSource().getId();
@@ -313,7 +352,7 @@ sap.ui.define([
 		 * and group settings and refreshes the list binding.
 		 * @public
 		 */
-		onRefresh : function () {
+		onRefresh: function () {
 			var oTable = this.byId("table");
 			oTable.getBinding("items").refresh();
 		},
@@ -328,7 +367,7 @@ sap.ui.define([
 		 * @param {sap.m.ObjectListItem} oItem selected Item
 		 * @private
 		 */
-		_showObject : function (oItem) {
+		_showObject: function (oItem) {
 			this.getRouter().navTo("object", {
 				objectId: oItem.getBindingContext().getProperty("ID")
 			});
@@ -339,7 +378,7 @@ sap.ui.define([
 		 * @param {sap.ui.model.Filter[]} aTableSearchState An array of filters for the search
 		 * @private
 		 */
-		_applySearch: function(aTableSearchState) {
+		_applySearch: function (aTableSearchState) {
 			var oTable = this.byId("table"),
 				oViewModel = this.getModel("worklistView");
 			oTable.getBinding("items").filter(aTableSearchState, "Application");
@@ -349,7 +388,7 @@ sap.ui.define([
 			}
 		},
 
-		onCancelGuarantee: function(event){
+		onCancelGuarantee: function (event) {
 			const oBindingContext = event.getSource().getBindingContext();
 			var that = this;
 
