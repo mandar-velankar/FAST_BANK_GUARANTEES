@@ -16,7 +16,14 @@ sap.ui.define([
             var sKey = this.model.createKey("/BankGuarantees", {
                 id: sId
             });
-            return this.odata(sKey).get({});
+
+			var mParameters = {
+				urlParameters: {
+					"$expand": "PriceAgreement"
+				}
+			};
+
+            return this.odata(sKey).get(mParameters);
         },
 
 		saveBankGuarantee: function (guarantee) {
