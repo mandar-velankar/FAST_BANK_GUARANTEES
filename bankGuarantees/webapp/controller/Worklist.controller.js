@@ -65,8 +65,7 @@ sap.ui.define([
 
 
 
-			aFilters.push(new Filter("Status", FilterOperator.EQ, "Preliminary"));
-			aFilters.push(new Filter("Status", FilterOperator.EQ, "Confirmed"));
+			aFilters.push(new Filter("Status", FilterOperator.EQ, "Open"));
 
 			oBinding.filter(aFilters);
 			});
@@ -291,8 +290,7 @@ sap.ui.define([
 
 			switch (sKey) {
 				case "Active":
-					aFilters.push(new Filter("Status", FilterOperator.EQ, "Preliminary"));
-					aFilters.push(new Filter("Status", FilterOperator.EQ, "Confirmed"));
+					aFilters.push(new Filter("Status", FilterOperator.EQ, "Open"));
 					break;
 				case "Expired":
 					aFilters.push(new Filter("PriceAgreement/ExpiryDate", FilterOperator.LE, todayDate));
