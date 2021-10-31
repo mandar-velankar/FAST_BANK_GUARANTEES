@@ -65,8 +65,11 @@
 							<Column>
 								<Text text="{i18n>IssueDate}"/>
 							</Column>
-							<Column>
-								<Text text="{i18n>ClosingDate}"/>
+							<Column id="ClosingDate" visible="false">
+								<Text text="{i18n>ClosingDate}" />
+							</Column>
+							<Column id="ExpiryDate">
+								<Text text="{i18n>ExpiryDate}"/>
 							</Column>
 							<Column>
 								<Text text="{i18n>Type}"/>
@@ -100,6 +103,13 @@
 										}" />
 									<Text text="{
 											path: 'ClosingDate',
+											type: 'sap.ui.model.type.Date',
+											formatOptions: {
+												pattern: 'yyyy-MM-dd'
+											}
+										}" />
+										<Text text="{
+											path: 'PriceAgreement/0/ExpiryDate',
 											type: 'sap.ui.model.type.Date',
 											formatOptions: {
 												pattern: 'yyyy-MM-dd'
