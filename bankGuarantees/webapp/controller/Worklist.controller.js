@@ -291,26 +291,26 @@ sap.ui.define([
 			switch (sKey) {
 				case "Active":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Open"));
+					this.byId("ExpiryDate").setVisible(true);
+					this.byId("ClosingDate").setVisible(false);
+
 					break;
 				case "Expired":
 					aFilters.push(new Filter("PriceAgreement/ExpiryDate", FilterOperator.LE, todayDate));
+					this.byId("ExpiryDate").setVisible(true);
+					this.byId("ClosingDate").setVisible(false);
 
 					break;
 				case "Closed":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Cancelled"));
+					this.byId("ExpiryDate").setVisible(false);
+					this.byId("ClosingDate").setVisible(true);
 					break;
 				default:
 					break;
 			}
 
 			oBinding.filter(aFilters);
-
-
-
-
-
-
-
 		},
 
 		/**
