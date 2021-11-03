@@ -277,16 +277,8 @@ sap.ui.define([
 		onQuickFilter: function (oEvent) {
 			let oBinding = this.byId("table").getBinding("items"),
 				sKey = oEvent.getParameter("selectedKey"),
-				oCancelButton = this.byId("idBtnAction"),
 				aFilters = [],
 				todayDate = new Date();
-
-
-			if (sKey === "Expired") {
-				oCancelButton.setVisible(true);
-			} else {
-				oCancelButton.setVisible(false);
-			}
 
 			switch (sKey) {
 				case "Active":
