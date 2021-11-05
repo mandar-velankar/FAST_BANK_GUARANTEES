@@ -277,40 +277,32 @@ sap.ui.define([
 		onQuickFilter: function (oEvent) {
 			let oBinding = this.byId("table").getBinding("items"),
 				sKey = oEvent.getParameter("selectedKey"),
-				oCancelButton = this.byId("idBtnAction"),
 				aFilters = [],
 				todayDate = new Date();
-
-
-			if (sKey === "Expired") {
-				oCancelButton.setVisible(true);
-			} else {
-				oCancelButton.setVisible(false);
-			}
 
 			switch (sKey) {
 				case "Active":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Open"));
+					this.byId("ExpiryDate").setVisible(true);
+					this.byId("ClosingDate").setVisible(false);
+
 					break;
 				case "Expired":
 					aFilters.push(new Filter("PriceAgreement/ExpiryDate", FilterOperator.LE, todayDate));
+					this.byId("ExpiryDate").setVisible(true);
+					this.byId("ClosingDate").setVisible(false);
 
 					break;
 				case "Closed":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Cancelled"));
+					this.byId("ExpiryDate").setVisible(false);
+					this.byId("ClosingDate").setVisible(true);
 					break;
 				default:
 					break;
 			}
 
 			oBinding.filter(aFilters);
-
-
-
-
-
-
-
 		},
 
 		/**
