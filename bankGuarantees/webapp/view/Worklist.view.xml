@@ -105,13 +105,23 @@
 												pattern: 'yyyy-MM-dd'
 											}
 										}" />
-										<Text text="{
-											path: 'PriceAgreement/0/ExpiryDate',
-											type: 'sap.ui.model.type.Date',
-											formatOptions: {
-												pattern: 'yyyy-MM-dd'
-											}
-										}" />
+
+									<Text
+										text="{= ${PriceAgreement/0/TenderID} ? 
+											${ 	path: 'PriceAgreement/0/ExpiryDate', 
+												type: 'sap.ui.model.type.Date', 
+												formatOptions: { 
+													pattern: 'yyyy-MM-dd' 
+												} 
+											} : 
+											${ 	path: 'ExpectedExpiryDate', 
+												type: 'sap.ui.model.type.Date', 
+												formatOptions: { 
+													pattern: 'yyyy-MM-dd' 
+												} 
+											} 
+										}" 
+									/>
 									<Text text="{Type}"/>
 									<Text text="{
 									path: 'GuaranteedAmount',
