@@ -33,6 +33,7 @@ sap.ui.define([
                 "reference",
                 "issueDate",
                 "closingDate",
+                "expectedExpiryDate",
                 "status",
                 "type",
                 "guaranteedAmount",
