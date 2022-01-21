@@ -107,8 +107,8 @@
 										}" />
 
 									<Text
-										text="{= ${PriceAgreement/0/TenderID} ? 
-											${ 	path: 'PriceAgreement/0/ExpiryDate', 
+										text="{= ${PriceAgreement/TenderId} ? 
+											${ 	path: 'PriceAgreement/ExpiryDate', 
 												type: 'sap.ui.model.type.Date', 
 												formatOptions: { 
 													pattern: 'yyyy-MM-dd' 
