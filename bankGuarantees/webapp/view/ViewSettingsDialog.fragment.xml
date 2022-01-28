@@ -15,7 +15,7 @@
 				key="TenderID"/>
 			<ViewSettingsItem
 				text="{i18n>TenderStatus}"
-				key="TenderStatus"/>
+				key="Tender/TenderStatus"/>
 			<ViewSettingsItem
 				text="{i18n>Type}"
 				key="Type"/>
