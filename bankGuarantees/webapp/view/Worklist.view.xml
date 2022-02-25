@@ -15,14 +15,11 @@
 		</f:title>
 
 		<f:content>
-			<IconTabBar id="idIconTabBarFiori2" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding" select=".onQuickFilter">
+			<IconTabBar id="idIconTabBarFiori2" expanded="{device>/isNoPhone}" expandable="false" class="sapUiResponsiveContentPadding" select=".onQuickFilter">
 				<items>
-					<IconTabFilter text="Active" key="Active" >
-					</IconTabFilter>
-					<IconTabFilter text="Expired" key="Expired" >
-					</IconTabFilter>
-					<IconTabFilter text="Closed" key="Closed" >
-					</IconTabFilter>
+					<IconTabFilter text="Active" key="Active" />
+					<IconTabFilter text="Expired" key="Expired" />
+					<IconTabFilter text="Closed" key="Closed" />
 				</items>
 				<content>
 					<Table id="table" width="auto" items="{
@@ -32,7 +29,7 @@
 							descending: false
 						},
 						parameters: {
-							expand: 'Tender'
+							expand: 'Tender,PriceAgreement'
 						}
 
 							
@@ -60,16 +57,16 @@
 								<Text text="{i18n>TenderStatus}"/>
 							</Column>
 							<Column>
-								<Text text="{i18n>Status}"/>
-							</Column>
-							<Column>
 								<Text text="{i18n>Reference}"/>
 							</Column>
 							<Column>
 								<Text text="{i18n>IssueDate}"/>
 							</Column>
-							<Column>
-								<Text text="{i18n>ClosingDate}"/>
+							<Column id="ClosingDate" visible="false">
+								<Text text="{i18n>ClosingDate}" />
+							</Column>
+							<Column id="ExpiryDate">
+								<Text text="{i18n>ExpiryDate}"/>
 							</Column>
 							<Column>
 								<Text text="{i18n>Type}"/>
@@ -83,7 +80,7 @@
 							<Column>
 								<Text text="{i18n>Comment}"/>
 							</Column>
-							<Column hAlign="End" id="idBtnAction" visible="false">
+							<Column hAlign="Begin" id="idBtnAction" width="6em">
 								<Text text=""/>
 							</Column>
 						</columns>
@@ -93,7 +90,6 @@
 								<cells>
 									<ObjectIdentifier title="{TenderID}"/>
 									<Text text="{Tender/TenderStatus}"/>
-									<Text text="{Status}"/>
 									<Text text="{Reference}"/>
 									<Text text="{
 											path: 'IssueDate',
@@ -109,6 +105,23 @@
 												pattern: 'yyyy-MM-dd'
 											}
 										}" />
+
+									<Text
+										text="{= ${PriceAgreement/TenderId} ? 
+											${ 	path: 'PriceAgreement/ExpiryDate', 
+												type: 'sap.ui.model.type.Date', 
+												formatOptions: { 
+													pattern: 'yyyy-MM-dd' 
+												} 
+											} : 
+											${ 	path: 'ExpectedExpiryDate', 
+												type: 'sap.ui.model.type.Date', 
+												formatOptions: { 
+													pattern: 'yyyy-MM-dd' 
+												} 
+											} 
+										}" 
+									/>
 									<Text text="{Type}"/>
 									<Text text="{
 									path: 'GuaranteedAmount',
@@ -127,7 +140,7 @@
 									}
 								} {Currency}" />
 									<TextArea value="{Comment}" showExceededText="false" maxLength="500" valueLiveUpdate="false" liveChange="handleLiveChange" enabled="false"/>
-									<Button text="Cancel" press=".onCancelGuarantee" />
+									<Button text="Cancel" press=".onCancelGuarantee" visible="{= ${Status} !== 'Cancelled'}"/>
 
 								</cells>
 							</ColumnListItem>
