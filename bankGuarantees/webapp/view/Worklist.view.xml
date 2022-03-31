@@ -2,6 +2,7 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
 	xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
 	xmlns:layout="sap.ui.layout" height="100%">
 
 	<f:DynamicPage id="dynamicPageId" stickySubheaderProvider="iconTabBar" class="sapUiNoContentPadding" toggleHeaderOnTitleClick="false">
@@ -40,6 +41,16 @@
 							<OverflowToolbar>
 								<Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
 								<ToolbarSpacer />
+                                <Select id="idSlctCountry"  
+                                        items="{ path: '/UserCountry', sorter: { path: 'Country/CountryName' }, parameters: { expand: 'Country' },
+                                                events: {
+                                                    dataReceived: '.onUserCountriesReceived'
+                                                }
+                                                }"
+                                        change=".setFilter"
+                                        visible="{= ${appView>/layout} === 'OneColumn' }">
+                                        <core:Item key="{CountryCode}" text="{Country/CountryName}"/>
+                                </Select>
 								<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".setFilter">
 									<layoutData>
 										<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>

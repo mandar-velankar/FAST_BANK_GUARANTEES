@@ -123,10 +123,21 @@ sap.ui.define([
 			history.go(-1);
 		},
 
+        onUserCountriesReceived: function(evt){
+			// add empty item
+			this.byId("idSlctCountry").insertItem(new sap.ui.core.Item());
+		},
+
 		setFilter: function () {
 			var sSearch = this.byId("searchField").getProperty("value");
 			var orFilters = [];
 			var andFilters = [];
+
+            const oCountry = this.byId("idSlctCountry").getSelectedItem() ? this.byId("idSlctCountry").getSelectedItem().getKey() : "";
+
+			if (oCountry != ""){
+				andFilters.push(new sap.ui.model.Filter("CountryCode", "EQ", oCountry));
+			}
 
 			if (sSearch.length > 0) {
 
