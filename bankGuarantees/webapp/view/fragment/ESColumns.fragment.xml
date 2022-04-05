@@ -1,0 +1,22 @@
+<core:FragmentDefinition 
+	xmlns="sap.m" 
+	xmlns:core="sap.ui.core">
+    <Column  visible="{= ${bg>/selectedCountry} === 'ES'}">
+        <Text text="{i18n>BankStatus}"/>
+    </Column>
+    <Column  visible="{= ${bg>/selectedCountry} === 'ES'}">
+        <Text text="{i18n>BankName}"/>
+    </Column>
+    <Column visible="{= ${bg>/selectedCountry} === 'ES'}">
+        <Text text="{i18n>BankGuaranteeID}" />
+    </Column>
+    <Column  visible="{= ${bg>/selectedCountry} === 'ES'}">
+        <Text text="{i18n>BankRequestDate}"/>
+    </Column>
+    <Column  visible="{= ${bg>/selectedCountry} === 'ES'}">
+        <Text text="{i18n>IssueDate}"/>
+    </Column>
+    <Column  visible="{= ${bg>/selectedCountry} === 'ES'}">
+        <Text text="{i18n>ShippingDate}"/>
+    </Column>
+</core:FragmentDefinition >

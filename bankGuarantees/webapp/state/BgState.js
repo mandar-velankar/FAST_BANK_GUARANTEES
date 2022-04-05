@@ -14,7 +14,8 @@ sap.ui.define([
 			//data used for the view
 			this.data = {
                 //bankGuarantee: new BankGuarantee(),
-				editMode: false
+				editMode: false,
+				selectedCountry:""
 			};
 
 			this.bgService = oService;
@@ -32,7 +33,9 @@ sap.ui.define([
 		getSelectedGuarantee: function(){
 			return this.getProperty("selectedGuarantee");
 		},
-
+		setSelectedCountry:function(countryCode){
+			this.setProperty("selectedCountry", countryCode);
+		},
         getBankGuarantee: function (sId){
            /* this.setProperty("bankGuarantee", new BankGuarantee());
 			return this.getService().getBankGuarantee(sId).then((guaranteeResponse) => {
