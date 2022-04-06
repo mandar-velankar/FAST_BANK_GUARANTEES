@@ -122,12 +122,21 @@ sap.ui.define([
 			// eslint-disable-next-line sap-no-history-manipulation
 			history.go(-1);
 		},
-
+		itemsTableFactory:function(id,context){
+			var countryCode = context.getProperty("CountryCode");
+			switch (countryCode) {
+				case 'ES': return this.byId("escli").clone(id);			
+				default: return this.byId("dcli").clone(id);
+			}
+		},
         onUserCountriesReceived: function(evt){
 			// add empty item
 			this.byId("idSlctCountry").insertItem(new sap.ui.core.Item());
+			var data = evt.getParameter("data");
+			if(data && data.results && data.results.length === 1){
+				this.bgState.setSelectedCountry(data.results[0].CountryCode);
+			}
 		},
-
 		setFilter: function () {
 			var sSearch = this.byId("searchField").getProperty("value");
 			var orFilters = [];
