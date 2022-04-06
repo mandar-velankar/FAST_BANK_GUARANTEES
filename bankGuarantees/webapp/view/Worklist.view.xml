@@ -42,6 +42,7 @@
 								<Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
 								<ToolbarSpacer />
                                 <Select id="idSlctCountry"  
+										selectedKey="{bg>/selectedCountry}"
                                         items="{ path: '/UserCountry', sorter: { path: 'Country/CountryName' }, parameters: { expand: 'Country' },
                                                 events: {
                                                     dataReceived: '.onUserCountriesReceived'
@@ -67,19 +68,9 @@
 							<Column>
 								<Text text="{i18n>TenderStatus}"/>
 							</Column>
-							<Column>
-								<Text text="{i18n>Reference}"/>
-							</Column>
-							<Column>
-								<Text text="{i18n>IssueDate}"/>
-							</Column>
-							<Column id="ClosingDate" visible="false">
-								<Text text="{i18n>ClosingDate}" />
-							</Column>
-							<Column id="ExpiryDate">
-								<Text text="{i18n>ExpiryDate}"/>
-							</Column>
-							<Column>
+							<core:Fragment fragmentName="com.bayer.tender.bankguarantees.view.fragment.DefaultColumns" type="XML" />
+							<core:Fragment fragmentName="com.bayer.tender.bankguarantees.view.fragment.ESColumns" type="XML" />
+							<Column >
 								<Text text="{i18n>Type}"/>
 							</Column>
 							<Column>
@@ -96,60 +87,34 @@
 							</Column>
 						</columns>
 
+						<dependents>
+							<core:Fragment fragmentName="com.bayer.tender.bankguarantees.view.fragment.DefaultItems" type="XML" />
+							<core:Fragment fragmentName="com.bayer.tender.bankguarantees.view.fragment.ESItems" type="XML" />
+						</dependents>
 						<items>
 							<ColumnListItem>
 								<cells>
 									<ObjectIdentifier title="{TenderID}"/>
 									<Text text="{Tender/TenderStatus}"/>
-									<Text text="{Reference}"/>
-									<Text text="{
-											path: 'IssueDate',
-											type: 'sap.ui.model.type.Date',
-											formatOptions: {
-												pattern: 'yyyy-MM-dd'
-											}
-										}" />
-									<Text text="{
-											path: 'ClosingDate',
-											type: 'sap.ui.model.type.Date',
-											formatOptions: {
-												pattern: 'yyyy-MM-dd'
-											}
-										}" />
-
-									<Text
-										text="{= ${PriceAgreement/TenderId} ? 
-											${ 	path: 'PriceAgreement/ExpiryDate', 
-												type: 'sap.ui.model.type.Date', 
-												formatOptions: { 
-													pattern: 'yyyy-MM-dd' 
-												} 
-											} : 
-											${ 	path: 'ExpectedExpiryDate', 
-												type: 'sap.ui.model.type.Date', 
-												formatOptions: { 
-													pattern: 'yyyy-MM-dd' 
-												} 
-											} 
-										}" 
-									/>
+									<core:Fragment fragmentName="com.bayer.tender.bankguarantees.view.fragment.DefaultItems" type="XML" />
+									<core:Fragment fragmentName="com.bayer.tender.bankguarantees.view.fragment.ESItems" type="XML" />
 									<Text text="{Type}"/>
 									<Text text="{
-									path: 'GuaranteedAmount',
-									type: 'sap.ui.model.type.Float',
-									formatOptions: {
-										minIntegerDigits: 3,
-										maxFractionDigits: 2
-									}
-								} {Currency}" />
-									<Text text="{
-									path: 'GuaranteedAmount',
-									type: 'sap.ui.model.type.Float',
-									formatOptions: {
-										minIntegerDigits: 3,
-										maxFractionDigits: 2
-									}
-								} {Currency}" />
+										path: 'GuaranteedAmount',
+										type: 'sap.ui.model.type.Float',
+										formatOptions: {
+											minIntegerDigits: 3,
+											maxFractionDigits: 2
+										}
+									} {Currency}" />
+										<Text text="{
+										path: 'GuaranteedAmount',
+										type: 'sap.ui.model.type.Float',
+										formatOptions: {
+											minIntegerDigits: 3,
+											maxFractionDigits: 2
+										}
+									} {Currency}" />
 									<TextArea value="{Comment}" showExceededText="false" maxLength="500" valueLiveUpdate="false" liveChange="handleLiveChange" enabled="false"/>
 									<Button text="Cancel" press=".onCancelGuarantee" visible="{= ${Status} !== 'Cancelled'}"/>
 

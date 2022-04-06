@@ -1,0 +1,35 @@
+<core:FragmentDefinition 
+	xmlns="sap.m" 
+	xmlns:core="sap.ui.core">
+            <Text text="{Reference}"  visible="{= ${bg>/selectedCountry} !== 'ES'}"/>
+            <Text text="{
+                    path: 'IssueDate',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions: {
+                        pattern: 'yyyy-MM-dd'
+                    }
+                }"  />
+            <Text text="{
+                    path: 'ClosingDate',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions: {
+                        pattern: 'yyyy-MM-dd'
+                    }
+                }"   visible="{= ${bg>/selectedCountry} !== 'ES'}"/>
+            <Text
+                text="{= ${PriceAgreement/TenderId} ? 
+                    ${ 	path: 'PriceAgreement/ExpiryDate', 
+                        type: 'sap.ui.model.type.Date', 
+                        formatOptions: { 
+                            pattern: 'yyyy-MM-dd' 
+                        } 
+                    } : 
+                    ${ 	path: 'ExpectedExpiryDate', 
+                        type: 'sap.ui.model.type.Date', 
+                        formatOptions: { 
+                            pattern: 'yyyy-MM-dd' 
+                        } 
+                    } 
+                }"  visible="{= ${bg>/selectedCountry} !== 'ES'}"
+            />
+</core:FragmentDefinition >
