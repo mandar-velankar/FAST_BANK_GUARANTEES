@@ -19,4 +19,7 @@
     <Column  visible="{= ${bg>/selectedCountry} === 'ES'}">
         <Text text="{i18n>ShippingDate}"/>
     </Column>
+    <Column id="cancellationDate"  visible="{= ${bg>/selectedCountry} === 'ES'}">
+        <Text text="{i18n>cancellationDate}"/>
+    </Column>
 </core:FragmentDefinition >
