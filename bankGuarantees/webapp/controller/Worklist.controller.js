@@ -122,13 +122,6 @@ sap.ui.define([
 			// eslint-disable-next-line sap-no-history-manipulation
 			history.go(-1);
 		},
-		itemsTableFactory:function(id,context){
-			var countryCode = context.getProperty("CountryCode");
-			switch (countryCode) {
-				case 'ES': return this.byId("escli").clone(id);			
-				default: return this.byId("dcli").clone(id);
-			}
-		},
         onUserCountriesReceived: function(evt){
 			// add empty item
 			this.byId("idSlctCountry").insertItem(new sap.ui.core.Item());
@@ -188,6 +181,8 @@ sap.ui.define([
 
 			var oTable = this.byId("table"),
 				oViewModel = this.getModel("worklistView");
+				
+			this.setVisibilityExpiryOrClosingDate();
 			oTable.getBinding("items").filter(oFilters, FilterType.Application);
 		},
 
@@ -299,30 +294,47 @@ sap.ui.define([
 				sKey = oEvent.getParameter("selectedKey"),
 				aFilters = [],
 				todayDate = new Date();
-
+			this.sKey = sKey;
 			switch (sKey) {
 				case "Active":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Open"));
-					this.byId("ExpiryDate").setVisible(true);
-					this.byId("ClosingDate").setVisible(false);
 
 					break;
 				case "Expired":
 					aFilters.push(new Filter("PriceAgreement/ExpiryDate", FilterOperator.LE, todayDate));
-					this.byId("ExpiryDate").setVisible(true);
-					this.byId("ClosingDate").setVisible(false);
 
 					break;
 				case "Closed":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Cancelled"));
-					this.byId("ExpiryDate").setVisible(false);
-					this.byId("ClosingDate").setVisible(true);
 					break;
 				default:
 					break;
 			}
-
+			this.setVisibilityExpiryOrClosingDate();
 			oBinding.filter(aFilters);
+		},
+		setVisibilityExpiryOrClosingDate:function(){
+			if(this.bgState.getProperty("selectedCountry") !== 'ES'){
+				switch (this.sKey) {
+					case "Active":
+							this.byId("ExpiryDate").setVisible(true);
+							this.byId("ClosingDate").setVisible(false);
+											break;
+					case "Expired":
+							this.byId("ExpiryDate").setVisible(true);
+							this.byId("ClosingDate").setVisible(false);
+						break;
+					case "Closed":
+							this.byId("ExpiryDate").setVisible(false);
+							this.byId("ClosingDate").setVisible(true);
+						break;
+					default:
+						break;
+				}
+			}else{
+				this.byId("ExpiryDate").setVisible(false);
+				this.byId("ClosingDate").setVisible(false);
+			}
 		},
 
 		/**
