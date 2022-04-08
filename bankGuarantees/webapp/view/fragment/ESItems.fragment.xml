@@ -28,4 +28,12 @@
                     }
                 }" 
                 visible="{= ${bg>/selectedCountry} === 'ES'}"/>
+            <Text text="{
+                    path: 'ExpectedExpiryDate',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions: {
+                        pattern: 'yyyy-MM-dd'
+                    }
+                }" 
+                visible="{= ${bg>/selectedCountry} === 'ES'}"/>
 </core:FragmentDefinition >
