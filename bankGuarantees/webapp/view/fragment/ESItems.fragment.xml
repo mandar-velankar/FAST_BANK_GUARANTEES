@@ -1,0 +1,39 @@
+<core:FragmentDefinition 
+	xmlns="sap.m" 
+	xmlns:core="sap.ui.core">
+            <Text text="{BankStatus}" visible="{= ${bg>/selectedCountry} === 'ES'}"/>
+            <Text text="{BankName}"  visible="{= ${bg>/selectedCountry} === 'ES'}"/>
+            <Text text="{Reference}"  visible="{= ${bg>/selectedCountry} === 'ES'}"/>
+            <Text text="{
+                    path: 'BankRequestDate',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions: {
+                        pattern: 'yyyy-MM-dd'
+                    }
+                }" 
+                visible="{= ${bg>/selectedCountry} === 'ES'}"/>
+            <Text text="{
+                    path: 'IssueDate',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions: {
+                        pattern: 'yyyy-MM-dd'
+                    }
+                }" 
+                visible="{= ${bg>/selectedCountry} === 'ES'}"/>
+            <Text text="{
+                    path: 'ShippingDate',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions: {
+                        pattern: 'yyyy-MM-dd'
+                    }
+                }" 
+                visible="{= ${bg>/selectedCountry} === 'ES'}"/>
+            <Text text="{
+                    path: 'ExpectedExpiryDate',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions: {
+                        pattern: 'yyyy-MM-dd'
+                    }
+                }" 
+                visible="{= ${bg>/selectedCountry} === 'ES'}"/>
+</core:FragmentDefinition >

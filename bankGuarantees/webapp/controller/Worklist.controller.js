@@ -122,11 +122,24 @@ sap.ui.define([
 			// eslint-disable-next-line sap-no-history-manipulation
 			history.go(-1);
 		},
-
+        onUserCountriesReceived: function(evt){
+			// add empty item
+			this.byId("idSlctCountry").insertItem(new sap.ui.core.Item());
+			var data = evt.getParameter("data");
+			if(data && data.results && data.results.length === 1){
+				this.bgState.setSelectedCountry(data.results[0].CountryCode);
+			}
+		},
 		setFilter: function () {
 			var sSearch = this.byId("searchField").getProperty("value");
 			var orFilters = [];
 			var andFilters = [];
+
+            const oCountry = this.byId("idSlctCountry").getSelectedItem() ? this.byId("idSlctCountry").getSelectedItem().getKey() : "";
+
+			if (oCountry != ""){
+				andFilters.push(new sap.ui.model.Filter("CountryCode", "EQ", oCountry));
+			}
 
 			if (sSearch.length > 0) {
 
@@ -168,6 +181,8 @@ sap.ui.define([
 
 			var oTable = this.byId("table"),
 				oViewModel = this.getModel("worklistView");
+				
+			this.setVisibilityExpiryOrClosingDate();
 			oTable.getBinding("items").filter(oFilters, FilterType.Application);
 		},
 
@@ -279,30 +294,47 @@ sap.ui.define([
 				sKey = oEvent.getParameter("selectedKey"),
 				aFilters = [],
 				todayDate = new Date();
-
+			this.sKey = sKey;
 			switch (sKey) {
 				case "Active":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Open"));
-					this.byId("ExpiryDate").setVisible(true);
-					this.byId("ClosingDate").setVisible(false);
 
 					break;
 				case "Expired":
 					aFilters.push(new Filter("PriceAgreement/ExpiryDate", FilterOperator.LE, todayDate));
-					this.byId("ExpiryDate").setVisible(true);
-					this.byId("ClosingDate").setVisible(false);
 
 					break;
 				case "Closed":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Cancelled"));
-					this.byId("ExpiryDate").setVisible(false);
-					this.byId("ClosingDate").setVisible(true);
 					break;
 				default:
 					break;
 			}
-
+			this.setVisibilityExpiryOrClosingDate();
 			oBinding.filter(aFilters);
+		},
+		setVisibilityExpiryOrClosingDate:function(){
+			if(this.bgState.getProperty("selectedCountry") !== 'ES'){
+				switch (this.sKey) {
+					case "Active":
+							this.byId("ExpiryDate").setVisible(true);
+							this.byId("ClosingDate").setVisible(false);
+											break;
+					case "Expired":
+							this.byId("ExpiryDate").setVisible(true);
+							this.byId("ClosingDate").setVisible(false);
+						break;
+					case "Closed":
+							this.byId("ExpiryDate").setVisible(false);
+							this.byId("ClosingDate").setVisible(true);
+						break;
+					default:
+						break;
+				}
+			}else{
+				this.byId("ExpiryDate").setVisible(false);
+				this.byId("ClosingDate").setVisible(false);
+			}
 		},
 
 		/**
