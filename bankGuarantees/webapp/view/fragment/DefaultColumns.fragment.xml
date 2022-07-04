@@ -1,6 +1,9 @@
 <core:FragmentDefinition 
 	xmlns="sap.m" 
 	xmlns:core="sap.ui.core">
+    <Column visible="{= ${bg>/selectedCountry} !== 'ES'}">
+        <Text text="{i18n>TenderStatus}"/>
+    </Column>
     <Column  visible="{= ${bg>/selectedCountry} !== 'ES'}">
         <Text text="{i18n>Reference}"/>
     </Column>
