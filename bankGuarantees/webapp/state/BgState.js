@@ -67,6 +67,9 @@ sap.ui.define([
 				let oClosingDate = new Date();
 				oClosingDate.setHours(0,0,0,0);
 				guarantee.closingDate = oClosingDate;
+                if(guarantee.countryCode === 'ES'){
+                    guarantee.expectedExpiryDate = oClosingDate;
+                }
 				guarantee.status = "Cancelled";
 
 				this.setSelectedGuarantee(guarantee);
