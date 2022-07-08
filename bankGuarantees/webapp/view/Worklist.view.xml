@@ -65,9 +65,6 @@
 							<Column>
 								<Text text="{i18n>AssociatedTender}"/>
 							</Column>
-							<Column>
-								<Text text="{i18n>TenderStatus}"/>
-							</Column>
 							<core:Fragment fragmentName="com.bayer.tender.bankguarantees.view.fragment.DefaultColumns" type="XML" />
 							<core:Fragment fragmentName="com.bayer.tender.bankguarantees.view.fragment.ESColumns" type="XML" />
 							<Column >
@@ -95,7 +92,6 @@
 							<ColumnListItem>
 								<cells>
 									<ObjectIdentifier title="{TenderID}"/>
-									<Text text="{Tender/TenderStatus}"/>
 									<core:Fragment fragmentName="com.bayer.tender.bankguarantees.view.fragment.DefaultItems" type="XML" />
 									<core:Fragment fragmentName="com.bayer.tender.bankguarantees.view.fragment.ESItems" type="XML" />
 									<Text text="{Type}"/>
