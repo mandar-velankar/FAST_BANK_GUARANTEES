@@ -295,6 +295,7 @@ sap.ui.define([
 				aFilters = [],
 				todayDate = new Date();
 			this.sKey = sKey;
+            this.getModel("worklistView").setProperty("/selectedStatus", sKey);
 			switch (sKey) {
 				case "Active":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Open"));
