@@ -1,7 +1,7 @@
 <core:FragmentDefinition 
 	xmlns="sap.m" 
 	xmlns:core="sap.ui.core">
-            <Text text="{BankStatus}" visible="{= ${bg>/selectedCountry} === 'ES'}"/>
+            <Text text="{BankStatus}" visible="false"/>
             <Text text="{BankName}"  visible="{= ${bg>/selectedCountry} === 'ES'}"/>
             <Text text="{Reference}"  visible="{= ${bg>/selectedCountry} === 'ES'}"/>
             <Text text="{

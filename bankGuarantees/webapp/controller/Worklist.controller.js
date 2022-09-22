@@ -295,6 +295,7 @@ sap.ui.define([
 				aFilters = [],
 				todayDate = new Date();
 			this.sKey = sKey;
+            this.getModel("worklistView").setProperty("/selectedStatus", sKey);
 			switch (sKey) {
 				case "Active":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Open"));
@@ -302,7 +303,7 @@ sap.ui.define([
 					break;
 				case "Expired":
 					aFilters.push(new Filter("PriceAgreement/ExpiryDate", FilterOperator.LE, todayDate));
-
+                    aFilters.push(new Filter("Status", FilterOperator.NE, "Cancelled"));
 					break;
 				case "Closed":
 					aFilters.push(new Filter("Status", FilterOperator.EQ, "Cancelled"));
