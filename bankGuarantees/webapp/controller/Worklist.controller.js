@@ -63,14 +63,10 @@ sap.ui.define([
 				oViewModel.setProperty("/tableBusyDelay", iOriginalBusyDelay);
 				let oBinding = oTable.getBinding("items"),
 				aFilters = [];
-                const oCountry = this.byId("idSlctCountry").getSelectedItem() ? this.byId("idSlctCountry").getSelectedItem().getKey() : "";
-
-                if (oCountry != ""){
-                    aFilters.push(new sap.ui.model.Filter("CountryCode", "EQ", oCountry));
-                }
-
-
-
+                const oCountry = this.byId("idSlctCountry").getSelectedItem() ? this.byId("idSlctCountry").getSelectedItem().getKey() : this.byId("idSlctCountry").getItems()[0].getKey();
+                this.byId("idSlctCountry").setSelectedKey(oCountry);
+                this.setFilter();
+            
 			aFilters.push(new Filter("Status", FilterOperator.EQ, "Open"));
 
 			oBinding.filter(aFilters);
@@ -130,7 +126,7 @@ sap.ui.define([
 		},
         onUserCountriesReceived: function(evt){
 			// add empty item
-			 this.byId("idSlctCountry").insertItem(new sap.ui.core.Item());
+			//this.byId("idSlctCountry").insertItem(new sap.ui.core.Item());
 			var data = evt.getParameter("data");
 			if(data && data.results && data.results.length === 1){
 				this.bgState.setSelectedCountry(data.results[0].CountryCode);
