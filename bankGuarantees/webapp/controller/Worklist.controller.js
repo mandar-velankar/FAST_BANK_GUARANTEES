@@ -130,7 +130,7 @@ sap.ui.define([
 		},
         onUserCountriesReceived: function(evt){
 			// add empty item
-			// this.byId("idSlctCountry").insertItem(new sap.ui.core.Item());
+			 this.byId("idSlctCountry").insertItem(new sap.ui.core.Item());
 			var data = evt.getParameter("data");
 			if(data && data.results && data.results.length === 1){
 				this.bgState.setSelectedCountry(data.results[0].CountryCode);
