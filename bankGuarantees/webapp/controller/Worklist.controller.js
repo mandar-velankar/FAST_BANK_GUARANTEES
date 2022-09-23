@@ -57,18 +57,20 @@ sap.ui.define([
 			// Make sure, busy indication is showing immediately so there is no
 			// break after the busy indication for loading the view's meta data is
 			// ended (see promise 'oWhenMetadataIsLoaded' in AppController)
+
 			oTable.attachEventOnce("updateFinished", function () {
 				// Restore original busy indicator delay for worklist's table
 				oViewModel.setProperty("/tableBusyDelay", iOriginalBusyDelay);
 				let oBinding = oTable.getBinding("items"),
 				aFilters = [];
-
-
-
+                const oCountry = this.byId("idSlctCountry").getSelectedItem() ? this.byId("idSlctCountry").getSelectedItem().getKey() : this.byId("idSlctCountry").getItems()[0].getKey();
+                this.byId("idSlctCountry").setSelectedKey(oCountry);
+                this.setFilter();
+            
 			aFilters.push(new Filter("Status", FilterOperator.EQ, "Open"));
 
 			oBinding.filter(aFilters);
-			});
+			}.bind(this));
 
 
 		},
@@ -124,7 +126,7 @@ sap.ui.define([
 		},
         onUserCountriesReceived: function(evt){
 			// add empty item
-			this.byId("idSlctCountry").insertItem(new sap.ui.core.Item());
+			//this.byId("idSlctCountry").insertItem(new sap.ui.core.Item());
 			var data = evt.getParameter("data");
 			if(data && data.results && data.results.length === 1){
 				this.bgState.setSelectedCountry(data.results[0].CountryCode);
