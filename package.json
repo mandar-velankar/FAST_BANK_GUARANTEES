@@ -11,7 +11,9 @@
 		"build:cf": "mbt build -p=cf --mtar=FASTCAP-bank_guarantees-Frontend-CF.mtar",
 		"deploy:cf": "cf deploy mta_archives/FASTCAP-bank_guarantees-Frontend-CF.mtar -e cf.mtaext"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"@sap/approuter": "^16.1.0"
+	},
 	"devDependencies": {
 		"mbt": "~1.0.17"
 	},
